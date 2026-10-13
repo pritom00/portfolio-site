@@ -198,7 +198,8 @@ h1, h2, h3, p { margin: 0; }
 }
 .ring { position: absolute; inset: 0; border-radius: 30px; border: 2px solid var(--c); visibility: hidden; pointer-events: none; animation: ripple 2.2s ease-out infinite; }
 .layer.on .ring { visibility: visible; }
-.anchor { position: absolute; top: 150px; width: 0; height: 0; }
+/* billboard: 0x0 point on the plate edge, counter-rotated from JS so its label always faces the screen */
+.anchor { position: absolute; top: 150px; width: 0; height: 0; transform-origin: 0 0; }
 .anchor.r { left: 314px; }
 .anchor.l { left: -14px; }
 .hs { position: absolute; top: -20px; display: flex; align-items: center; background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; }
@@ -275,7 +276,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .pj-ring { position: absolute; left: 50%; top: 46%; width: 340px; height: 340px; margin: -170px 0 0 -170px; border-radius: 50%; border: 2px solid; opacity: 0; pointer-events: none; }
 .pj-tilt { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
-.pj-card { position: absolute; left: 50%; top: 46%; width: 340px; height: 430px; margin: -215px 0 0 -170px; transform-style: preserve-3d; will-change: transform, opacity; }
+.pj-card { position: absolute; left: 50%; top: 46%; width: 340px; height: 430px; margin: -215px 0 0 -170px; transform-style: preserve-3d; will-change: transform; }
 .pj-spin { position: absolute; inset: 0; transform-style: preserve-3d; }
 .pj-face { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: linear-gradient(160deg, rgba(26, 38, 24, 0.94), rgba(9, 13, 6, 0.96)); border: 1px solid var(--line); transition: box-shadow .5s ease, border-color .5s ease; }
 .pj-glare { position: absolute; inset: 0; border-radius: 28px; pointer-events: none; z-index: 6; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 25%), rgba(255, 255, 255, 0.16), transparent 55%); }

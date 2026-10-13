@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { readFileSync } from 'node:fs';
 
 // ---------- a minimal browser ----------
 const dom = new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>', { pretendToBeVisual: true, url: 'http://localhost/' });
@@ -80,7 +81,26 @@ async function main() {
     check('hero: Explode/Collapse changes the layer spacing', $$('.layer', m.host)[0].style.transform !== z0, `${z0} -> ${$$('.layer', m.host)[0].style.transform}`);
     const autoBtn = $$('.ctl-btn', m.host).find((b) => /Auto-tour/.test(b.textContent || ''))!;
     check('hero: tour stopped after manual pick', /off/.test(autoBtn.textContent || ''));
-    check('hero: labels counter-rotate (billboards)', /rotateZ\(.*\) rotateX\(.*\)/.test(($('.anchor > div', m.host) as HTMLElement).style.transform));
+    check('hero: labels counter-rotate (billboards)', /rotateZ\(.*\) rotateX\(.*\)/.test(($('.anchor', m.host) as HTMLElement).style.transform));
+    // 3D contract: the element that carries the counter-rotation (the billboard) must be reached from the perspective
+    // scene through ancestors that ALL keep the 3D context (transform-style: preserve-3d). One flat ancestor and the
+    // browser flattens the label into a tilted plane (the squashed-label bug seen on the first deploy).
+    {
+      const css = readFileSync(new URL('../src/app/globals.css', import.meta.url), 'utf8');
+      const has3d = (cls: string) => new RegExp('\\.' + cls + '\\s*\\{[^}]*transform-style:\\s*preserve-3d').test(css);
+      const scene = $('.map-scene', m.host)!;
+      const billboards = $$('.map-scene *', m.host).filter((el) => /^rotateZ\(.*\) rotateX\(/.test(el.style.transform));
+      let chainOk = billboards.length === 5, broken = billboards.length === 5 ? '' : `expected 5 billboards, found ${billboards.length}`;
+      for (const b of billboards) {
+        let el: HTMLElement | null = b.parentElement;
+        while (el && el !== scene) {
+          const cls = Array.from(el.classList)[0];
+          if (!cls || !has3d(cls)) { chainOk = false; broken = `.${cls} is a flat ancestor of a label`; }
+          el = el.parentElement;
+        }
+      }
+      check('hero: 3D chain from scene to every label keeps preserve-3d (no flattening)', chainOk, broken);
+    }
     check('hero: GitHub heat grid loaded real counts', await waitFor(() => $$('.heat .cell', m.host).length === 48 && /96 public events/.test($('.heat-note', m.host)?.textContent || '')));
     check('hero: availability card shows status', /Open to work/.test(m.host.textContent || ''));
     await m.unmount();
@@ -101,6 +121,24 @@ async function main() {
     check('projects: ArrowLeft key goes back', title() === '[Project 1 name]', String(title()));
     await click($$('.pj-dot', m.host)[3]); await waitFor(() => title() === '[Project 4 name]');
     check('projects: dot jumps to project 4', title() === '[Project 4 name]', String(title()));
+    {
+      const css = readFileSync(new URL('../src/app/globals.css', import.meta.url), 'utf8');
+      const has3d = (cls: string) => new RegExp('\\.' + cls + '\\s*\\{[^}]*transform-style:\\s*preserve-3d').test(css);
+      const floats = $$('.pj-badge, .pj-metric', m.host);
+      const stageEl = $('.pj-stage', m.host)!;
+      let ok = floats.length === 8, broken = floats.length === 8 ? '' : `expected 8 floating items, found ${floats.length}`;
+      for (const f of floats) {
+        let el: HTMLElement | null = f.parentElement;
+        while (el && el !== stageEl) {
+          const cls = Array.from(el.classList)[0];
+          if (!cls || !has3d(cls)) { ok = false; broken = `.${cls} is a flat ancestor of a floating badge`; }
+          el = el.parentElement;
+        }
+      }
+      const cardRule = (css.match(/\.pj-card\s*\{[^}]*\}/) || [''])[0];
+      if (/will-change:[^;]*opacity/.test(cardRule)) { ok = false; broken = '.pj-card uses will-change: opacity, which can flatten 3D children'; }
+      check('projects: 3D chain to floating badges keeps preserve-3d', ok, broken);
+    }
     check('projects: only the front card animates its preview', $$('.pj-media.off', m.host).length === 3);
     await click($$('.pj-tab', m.host)[1]);
     check('projects: Solution tab shows the solution text', /What you built and how people install/.test($('.pj-text', m.host)?.textContent || ''));

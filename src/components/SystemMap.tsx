@@ -70,14 +70,18 @@ export default function SystemMap({ sel, explode, auto, onSelect, onExplode, onA
                   <div className="layer-float">
                     <div className="plate" onClick={() => onSelect(i)} />
                     <div className="ring" />
-                    <div className={`anchor ${right ? 'r' : 'l'}`}>
-                      <div ref={(n) => { bbs.current[i] = n; }} style={{ transform: `rotateZ(${-RZ}deg) rotateX(${-RX}deg)` }}>
-                        <button className="hs" onClick={() => onSelect(i)} aria-pressed={on} aria-label={`${L.name} layer`}>
-                          {right && <><span className="hs-dot" /><span className="hs-line" /></>}
-                          <span className="hs-label">{L.name}</span>
-                          {!right && <><span className="hs-line" /><span className="hs-dot" /></>}
-                        </button>
-                      </div>
+                    {/* the anchor is the billboard: it is a direct child of the preserve-3d group and carries the
+                        counter-rotation, so the label inside is drawn flat to the screen */}
+                    <div
+                      className={`anchor ${right ? 'r' : 'l'}`}
+                      ref={(n) => { bbs.current[i] = n; }}
+                      style={{ transform: `rotateZ(${-RZ}deg) rotateX(${-RX}deg)` }}
+                    >
+                      <button className="hs" onClick={() => onSelect(i)} aria-pressed={on} aria-label={`${L.name} layer`}>
+                        {right && <><span className="hs-dot" /><span className="hs-line" /></>}
+                        <span className="hs-label">{L.name}</span>
+                        {!right && <><span className="hs-line" /><span className="hs-dot" /></>}
+                      </button>
                     </div>
                   </div>
                 </div>
