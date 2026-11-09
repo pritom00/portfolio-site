@@ -1,25 +1,40 @@
-/**
- * All of the words on the site live here.
- * Replace every [bracketed] placeholder with your real content, then save.
- */
 
+
+/**
+ * Portfolio content configuration.
+ * Personal details, system layers, projects, ticker, and process steps.
+ */
 export const profile = {
   name: 'Estiaz Nur Pritom',
   shortName: 'Estiaz Pritom',
   initials: 'EP',
-  role: 'AI Full Stack Developer',
-  headline: ['Full Stack', 'AI Developer'] as const,
-  pitch: 'I build and ship AI-powered products, from interface to inference.',
+  role: 'Full-Stack Developer',
+  headline: ['Full Stack', 'Developer'] as const,
+  pitch:
+    'I build practical web applications, from intuitive interfaces to secure backend services.',
   github: 'https://github.com/pritom00',
   githubUser: 'pritom00',
-  email: '', // TODO: your email, e.g. 'you@example.com'
-  linkedin: '', // TODO: your LinkedIn URL
-  cv: '', // TODO: put your CV in /public and set '/cv.pdf'
-  availability: { open: true, label: 'Open to work', detail: 'Freelance & full-time' },
-  building: { name: '[Current project]', note: '[One line about what you are building right now]' }
+  email: '',
+  linkedin: '',
+  cv: '',
+  availability: {
+    open: true,
+    label: 'Open to work',
+    detail: 'Internships and software engineering opportunities',
+  },
+  building: {
+    name: 'CourierHub',
+    note: 'Multi-role courier and logistics platform',
+  },
 };
 
-export const rotatingWords = ['AI agents', 'RAG apps', 'full-stack products', 'things that ship'];
+
+export const rotatingWords = [
+  'full-stack applications',
+  'backend systems',
+  'secure APIs',
+  'useful products',
+];
 
 export type Layer = {
   id: string;
@@ -28,15 +43,50 @@ export type Layer = {
   rgb: string;
   desc: string;
   tools: string[];
-  level?: number; // 0-100, optional. Leave undefined to show [%]
+  level?: number;
 };
 
 export const layers: Layer[] = [
-  { id: 'frontend', name: 'Frontend', color: '#FFCE06', rgb: '255,206,6', desc: '[How you build fast, accessible interfaces and what you are proud of.]', tools: ['[React]', '[Next.js]', '[Tailwind]'] },
-  { id: 'backend', name: 'Backend', color: '#B5FDCE', rgb: '181,253,206', desc: '[How you design APIs, auth and services.]', tools: ['[Node]', '[FastAPI]', '[REST]'] },
-  { id: 'ai', name: 'AI & Agents', color: '#20BE35', rgb: '32,190,53', desc: '[How you build LLM features, retrieval and agent workflows.]', tools: ['[LLM APIs]', '[RAG]', '[Agents]'] },
-  { id: 'data', name: 'Data', color: '#B5FDCE', rgb: '181,253,206', desc: '[How you model, store and query data.]', tools: ['[Postgres]', '[Vector DB]'] },
-  { id: 'devops', name: 'DevOps', color: '#FFFFFF', rgb: '255,255,255', desc: '[How you ship, monitor and scale.]', tools: ['[Docker]', '[Vercel]', '[CI/CD]'] }
+  {
+    id: 'frontend',
+    name: 'Frontend',
+    color: '#FFCE06',
+    rgb: '255,206,6',
+    desc: 'Building responsive interfaces and user-friendly web experiences.',
+    tools: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    id: 'backend',
+    name: 'Backend',
+    color: '#B5FDCE',
+    rgb: '181,253,206',
+    desc: 'Developing APIs, authentication, business logic, and server-side features.',
+    tools: ['Node.js', 'Express.js', 'REST APIs', 'Authentication'],
+  },
+  {
+    id: 'ai',
+    name: 'AI & Agents',
+    color: '#20BE35',
+    rgb: '32,190,53',
+    desc: 'Exploring AI-powered features and practical ways to integrate intelligent tools.',
+    tools: ['AI APIs', 'Automation', 'Integration'],
+  },
+  {
+    id: 'data',
+    name: 'Data',
+    color: '#B5FDCE',
+    rgb: '181,253,206',
+    desc: 'Working with application data, database models, and persistent storage.',
+    tools: ['PostgreSQL', 'Prisma', 'SQL'],
+  },
+  {
+    id: 'devops',
+    name: 'DevOps',
+    color: '#FFFFFF',
+    rgb: '255,255,255',
+    desc: 'Learning deployment, environment configuration, and reliable application delivery.',
+    tools: ['Git', 'Docker', 'Render', 'Vercel'],
+  },
 ];
 
 export type ProjectKind = 'chat' | 'dash' | 'graph' | 'term';
@@ -46,7 +96,7 @@ export type Project = {
   id: number;
   cat: ProjectCat;
   catLabel: string;
-  kind: ProjectKind; // decides which animated preview is drawn on the card
+  kind: ProjectKind;
   title: string;
   blurb: string;
   tag: string;
@@ -58,61 +108,122 @@ export type Project = {
   solution: string;
   result: string;
   metrics: { v: string; l: string }[];
-  demo: string; // live URL ('' shows a disabled button)
+  demo: string;
   repo: string;
 };
 
-const m3 = [{ v: '[00]', l: '[Metric]' }, { v: '[00]', l: '[Metric]' }, { v: '[00]', l: '[Metric]' }];
-
 export const projects: Project[] = [
   {
-    id: 1, cat: 'ai', catLabel: 'AI · Chat', kind: 'chat', title: '[Project 1 name]',
-    blurb: '[One line on what it does and who it is for.]', tag: 'Live', color: '#20BE35', rgb: '32,190,53',
-    stack: ['[Next.js]', '[FastAPI]', '[LLM]'], metric: '[Key result]',
-    problem: '[The problem you set out to solve, and who had it.]',
-    solution: '[What you built and the key technical decisions, including how you used AI tools.]',
-    result: '[What changed: numbers, feedback or lessons learned.]',
-    metrics: m3, demo: '', repo: 'https://github.com/pritom00'
+    id: 1,
+    cat: 'fullstack',
+    catLabel: 'Full-stack · Logistics',
+    kind: 'dash',
+    title: 'CourierHub',
+    blurb:
+      'A multi-role courier and logistics platform with customer, courier, and admin workflows.',
+    tag: 'Live',
+    color: '#FFCE06',
+    rgb: '255,206,6',
+    stack: [
+      'Next.js 15',
+      'TypeScript',
+      'TanStack Query',
+      'Zustand',
+      'Stripe',
+    ],
+    metric: '3 role-based workflows',
+    problem:
+      'Logistics platforms need different workflows for customers, couriers, and administrators. This project brings those experiences together in one application.',
+    solution:
+      'The frontend includes role-specific interfaces, protected routes, a shipment booking flow, price estimates, and Stripe payment integration.',
+    result:
+      'Designed to support the shipment lifecycle from customer booking to administrator assignment and courier status updates. Verify the complete payment flow against the deployed application before claiming end-to-end verification.',
+    metrics: [
+      { v: '3', l: 'Roles' },
+      { v: 'Stripe', l: 'Payments' },
+      { v: 'BFF', l: 'Architecture' },
+    ],
+    demo: 'https://courier-frontend-hi8r.onrender.com',
+    repo: 'https://github.com/pritom00/courier-frontend',
   },
   {
-    id: 2, cat: 'fullstack', catLabel: 'Full-stack · Dashboard', kind: 'dash', title: '[Project 2 name]',
-    blurb: '[One line on what it does and who it is for.]', tag: 'In progress', color: '#FFCE06', rgb: '255,206,6',
-    stack: ['[React]', '[Node]', '[Postgres]'], metric: '[Key result]',
-    problem: '[The problem you set out to solve, and who had it.]',
-    solution: '[What you built: frontend, API and data model, and why you chose them.]',
-    result: '[What changed: numbers, feedback or lessons learned.]',
-    metrics: m3, demo: '', repo: 'https://github.com/pritom00'
+    id: 2,
+    cat: 'fullstack',
+    catLabel: 'Full-stack · Marketplace',
+    kind: 'dash',
+    title: 'RentNest',
+    blurb:
+      'A rental property marketplace connecting tenants, landlords, and administrators.',
+    tag: 'Live',
+    color: '#20BE35',
+    rgb: '32,190,53',
+    stack: [
+      'Next.js 14',
+      'TypeScript',
+      'TanStack Query',
+      'Zustand',
+      'Stripe',
+      'Prisma',
+    ],
+    metric: 'Tenant-to-landlord workflows',
+    problem:
+      'Rental marketplaces need a clear way to discover properties, manage rental requests, and support different user roles.',
+    solution:
+      'The frontend provides role-specific dashboards, property management interfaces, rental request workflows, and payment integration.',
+    result:
+      'Designed to connect property discovery, rental requests, and payment workflows. Verify the deployed application and payment flow before claiming end-to-end verification.',
+    metrics: [
+      { v: '3', l: 'Roles' },
+      { v: 'Stripe', l: 'Payments' },
+      { v: 'E2E', l: 'Test the flow' },
+    ],
+    demo: 'https://rentnest-frontend.onrender.com',
+    repo: 'https://github.com/pritom00/rentnest-frontend',
   },
-  {
-    id: 3, cat: 'ai', catLabel: 'AI · Agent', kind: 'graph', title: '[Project 3 name]',
-    blurb: '[One line on what it does and who it is for.]', tag: 'Agent', color: '#B5FDCE', rgb: '181,253,206',
-    stack: ['[Python]', '[RAG]', '[Docker]'], metric: '[Key result]',
-    problem: '[The problem you set out to solve, and who had it.]',
-    solution: '[How the agent or retrieval pipeline works, and how you tested it.]',
-    result: '[What changed: numbers, feedback or lessons learned.]',
-    metrics: m3, demo: '', repo: 'https://github.com/pritom00'
-  },
-  {
-    id: 4, cat: 'tools', catLabel: 'Developer tool', kind: 'term', title: '[Project 4 name]',
-    blurb: '[One line on what it does and who it is for.]', tag: 'Open source', color: '#D9FFE8', rgb: '217,255,232',
-    stack: ['[TypeScript]', '[CLI]', '[CI/CD]'], metric: '[Key result]',
-    problem: '[The problem you set out to solve, and who had it.]',
-    solution: '[What you built and how people install and use it.]',
-    result: '[What changed: numbers, feedback or lessons learned.]',
-    metrics: m3, demo: '', repo: 'https://github.com/pritom00'
-  }
 ];
 
 export const tickerItems = [
-  '[React]', '[Next.js]', '[TypeScript]', '[Node]', '[FastAPI]', '[Python]',
-  '[LLM APIs]', '[RAG]', '[Agents]', '[Postgres]', '[Vector DB]', '[Docker]'
+  'Next.js',
+  'TypeScript',
+  'React',
+  'Node.js',
+  'Express.js',
+  'PostgreSQL',
+  'Prisma',
+  'TanStack Query',
+  'Zustand',
+  'Stripe',
+  'Git',
+  'Docker',
+  'Render',
+  'Vercel',
 ];
 
 export const processSteps = [
-  { title: 'Idea', text: '[How you define the problem and the user.]', color: '#20BE35' },
-  { title: 'Design', text: '[How you sketch the UI and data model.]', color: '#B5FDCE' },
-  { title: 'Build', text: '[How you code it and direct AI tools.]', color: '#FFCE06' },
-  { title: 'Deploy', text: '[How you ship, test and iterate.]', color: '#FFFFFF' }
+  {
+    title: 'Idea',
+    text: 'Understand the problem, the intended users, and the features the application needs.',
+    color: '#20BE35',
+  },
+  {
+    title: 'Design',
+    text: 'Plan the user interface, application architecture, API contracts, and data model.',
+    color: '#B5FDCE',
+  },
+  {
+    title: 'Build',
+    text: 'Implement the frontend, backend integrations, authentication, and application workflows.',
+    color: '#FFCE06',
+  },
+  {
+    title: 'Deploy',
+    text: 'Deploy the application, test important user journeys, and improve it using feedback.',
+    color: '#FFFFFF',
+  },
 ];
 
-export const chatSuggestions = ['What have you built?', "What's your stack?", 'Are you available?'];
+export const chatSuggestions = [
+  'What have you built?',
+  "What's your tech stack?",
+  'Are you available for opportunities?',
+];
