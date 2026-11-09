@@ -16,7 +16,7 @@ export const profile = {
   githubUser: 'pritom00',
   email: 'pritomofficial00@gmail.com',
   linkedin: 'https://www.linkedin.com/in/estiaz-nur-pritom-2b807221b/',
-  cv: '',
+  cv: 'resume.pdf',
   availability: {
     open: true,
     label: 'Open to work',
