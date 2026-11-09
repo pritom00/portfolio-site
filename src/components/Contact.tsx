@@ -35,10 +35,10 @@ export default function Contact() {
             ) : (
               <button className="btn btn-glass glass" disabled>[LinkedIn]</button>
             )}
-            {profile.cv ? (
-              <a className="btn btn-glass glass" href={profile.cv} download>Download CV</a>
+            {profile.Resume ? (
+              <a className="btn btn-glass glass" href={profile.Resume} download>Download Resume</a>
             ) : (
-              <button className="btn btn-glass glass" disabled>Download CV</button>
+              <button className="btn btn-glass glass" disabled>Download Resume</button>
             )}
           </div>
         </div>
