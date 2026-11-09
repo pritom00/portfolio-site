@@ -14,8 +14,8 @@ export const profile = {
     'I build practical web applications, from intuitive interfaces to secure backend services.',
   github: 'https://github.com/pritom00',
   githubUser: 'pritom00',
-  email: '',
-  linkedin: '',
+  email: 'pritomofficial00@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/estiaz-nur-pritom-2b807221b/',
   cv: '',
   availability: {
     open: true,
@@ -180,6 +180,43 @@ export const projects: Project[] = [
     demo: 'https://rentnest-frontend.onrender.com',
     repo: 'https://github.com/pritom00/rentnest-frontend',
   },
+
+  {
+    id: 3,
+    cat: 'fullstack',
+    catLabel: 'Full-stack · Developer Analytics',
+    kind: 'dash',
+    title: 'DevPulse',
+    blurb:
+      'A full-stack developer analytics platform with a dedicated web frontend and backend API.',
+    tag: 'Live',
+    color: '#B5FDCE',
+    rgb: '181,253,206',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'Prisma',
+    ],
+    metric: 'Full-stack web application',
+    problem:
+      'Developers need a convenient interface to explore useful project data and insights.',
+    solution:
+      'Built a web frontend connected to a dedicated backend API, separating the user interface from server-side application logic.',
+    result:
+      'Deployed the frontend on Vercel with separate source repositories for the frontend and API.',
+    metrics: [
+      { v: '2', l: 'Codebases' },
+      { v: 'API', l: 'Backend' },
+      { v: 'Web', l: 'Frontend' },
+    ],
+    demo: 'https://devpulse-web-lake.vercel.app/',
+    repo: 'https://github.com/pritom00/devpulse-web',
+  },
+
+
 ];
 
 export const tickerItems = [
